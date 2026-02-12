@@ -1,22 +1,17 @@
-@Service
 public class DrivingTestService extends GovernmentService {
 
-    public DrivingTestService(TrackingService trackingService) {
-        super(trackingService);
-    }
-
     @Override
-    protected boolean isEligible(Citizen citizen, ServiceRequest request) {
+    protected boolean isEligible(Citizen citizen) {
         return citizen.getAge() >= 18 && citizen.hasLearnersPermit();
-    }
-
-    @Override
-    protected ServiceResult processService(ServiceRequest request, Citizen citizen) {
-        return new ServiceResult("Driving Test Scheduled");
     }
 
     @Override
     public ServiceType getServiceType() {
         return ServiceType.DRIVING_TEST;
+    }
+
+    @Override
+    public double getFee() {
+        return 25.0;
     }
 }
