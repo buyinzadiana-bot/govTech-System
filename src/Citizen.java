@@ -1,5 +1,6 @@
-public class Citizen {
+package com.example.govtech.model;
 
+public class Citizen {
     private String nationalId;
     private int age;
     private boolean hasLearnersPermit;
