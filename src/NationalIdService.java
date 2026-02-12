@@ -1,6 +1,5 @@
 package com.example.govtech.service;
 
-import com.example.govtech.audit.AuditService;
 import com.example.govtech.model.Citizen;
 import com.example.govtech.model.ServiceRequest;
 import com.example.govtech.model.ServiceResult;
