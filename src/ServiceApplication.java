@@ -1,46 +1,38 @@
-import java.util.UUID;
-
 public class ServiceApplication {
+    public enum Status { PENDING, APPROVED, REJECTED }
 
     private String applicationId;
     private Citizen citizen;
     private GovernmentService service;
-    private ServiceStatus status;
+    private Status status;
 
-    public ServiceApplication(Citizen citizen, GovernmentService service) {
-        this.applicationId = UUID.randomUUID().toString();
+    public ServiceApplication(String applicationId, Citizen citizen, GovernmentService service) {
+        this.applicationId = applicationId;
         this.citizen = citizen;
         this.service = service;
-        this.status = ServiceStatus.PENDING;
+        this.status = Status.PENDING;
     }
 
-    public String getApplicationId() {
-        return applicationId;
+    public String getApplicationId() { return applicationId; }
+    public Citizen getCitizen() { return citizen; }
+    public GovernmentService getService() { return service; }
+    public Status getStatus() { return status; }
+
+    public void approve() throws Exception {
+        if (status == Status.APPROVED)
+            throw new Exception("Application already approved!");
+        status = Status.APPROVED;
     }
 
-    public GovernmentService getService() {
-        return service;
-    }
-
-    public ServiceStatus getStatus() {
-        return status;
-    }
-
-    public void approve() {
-        if (status != ServiceStatus.PENDING) {
-            throw new IllegalStateException("Cannot approve again");
-        }
-        status = ServiceStatus.APPROVED;
-    }
-
-    public double getFee() {
-        return service.getFee();
+    public void reject() throws Exception {
+        if (status == Status.REJECTED)
+            throw new Exception("Application already rejected!");
+        status = Status.REJECTED;
     }
 
     @Override
     public String toString() {
-        return applicationId + " | " +
-                service.getServiceType() + " | " +
-                status;
+        return "ApplicationID: " + applicationId + ", Citizen: " + citizen +
+                ", Service: " + service.getServiceName() + ", Status: " + status;
     }
 }
