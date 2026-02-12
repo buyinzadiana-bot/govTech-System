@@ -1,5 +1,6 @@
-public class ServiceResult {
+package com.example.govtech.model;
 
+public class ServiceResult {
     private String message;
 
     public ServiceResult(String message) {
@@ -7,15 +8,6 @@ public class ServiceResult {
     }
 
     public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String toString() {
         return message;
     }
 }
