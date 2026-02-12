@@ -1,23 +1,25 @@
 public class Main {
-
     public static void main(String[] args) {
 
-        Citizen citizen = new Citizen("12345", 20, true);
+        Citizen john = new Citizen("C001", "John Doe", 30);
+        Citizen jane = new Citizen("C002", "Jane Smith", 25);
 
         GovernmentService birthService = new BirthCertificateService();
         GovernmentService drivingService = new DrivingTestService();
 
-        ServiceApplication app1 =
-                new ServiceApplication(citizen, drivingService);
+        ServiceApplication app1 = new ServiceApplication("A001", john, birthService);
+        ServiceApplication app2 = new ServiceApplication("A002", jane, drivingService);
 
         ApplicationManager manager = new ApplicationManager();
+
         manager.addApplication(app1);
+        manager.addApplication(app2);
 
-        manager.approveApplication(app1.getApplicationId());
+        manager.displayAllApplications();
 
-        manager.displayApplications();
+        manager.approveApplication("A001");
+        manager.approveApplication("A002");
 
-        System.out.println("Total Revenue: " +
-                manager.calculateRevenue());
+        manager.displayAllApplications();
     }
 }
