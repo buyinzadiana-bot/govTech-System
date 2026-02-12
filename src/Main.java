@@ -2,51 +2,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // 1️⃣ Create shared helper (audit system)
-        AuditService auditService = new AuditService();
+        Citizen citizen = new Citizen("12345", 20, true);
 
-        // 2️⃣ Create government services (departments)
-        GovernmentService birthService =
-                new BirthCertificateService(auditService);
+        GovernmentService birthService = new BirthCertificateService();
+        GovernmentService drivingService = new DrivingTestService();
 
-        GovernmentService drivingService =
-                new DrivingTestService(auditService);
+        ServiceApplication app1 =
+                new ServiceApplication(citizen, drivingService);
 
-        GovernmentService nationalIdService =
-                new NationalIdService(auditService);
+        ApplicationManager manager = new ApplicationManager();
+        manager.addApplication(app1);
 
-        // 3️⃣ Put all services into a list
-        List<GovernmentService> services = List.of(
-                birthService,
-                drivingService,
-                nationalIdService
-        );
+        manager.approveApplication(app1.getApplicationId());
 
-        // 4️⃣ Create the registry (front desk)
-        GovernmentServiceRegistry registry =
-                new GovernmentServiceRegistry(services);
+        manager.displayApplications();
 
-        // 5️⃣ Create a citizen
-        Citizen citizen = new Citizen(
-                "123456789",
-                18,
-                false,   // hasNationalId
-                true     // hasLearnersPermit
-        );
-
-        // 6️⃣ Create a request
-        ServiceRequest request =
-                new ServiceRequest(ServiceType.DRIVING_TEST);
-
-        // 7️⃣ Ask the registry to handle it
-        ServiceResult result =
-                registry.handle(
-                        ServiceType.DRIVING_TEST,
-                        request,
-                        citizen
-                );
-
-        // 8️⃣ Print the result
-        System.out.println(result.getMessage());
+        System.out.println("Total Revenue: " +
+                manager.calculateRevenue());
     }
 }
