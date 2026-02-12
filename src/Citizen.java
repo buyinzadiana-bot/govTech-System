@@ -1,25 +1,21 @@
-package com.example.govtech.model;
-
 public class Citizen {
-    private String nationalId;
+    private String id;
+    private String name;
     private int age;
-    private boolean hasLearnersPermit;
 
-    public Citizen(String nationalId, int age, boolean hasLearnersPermit) {
-        this.nationalId = nationalId;
+    public Citizen(String id, String name, int age) {
+        this.id = id;
+        this.name = name;
         this.age = age;
-        this.hasLearnersPermit = hasLearnersPermit;
     }
 
-    public String getNationalId() {
-        return nationalId;
-    }
+    // Getters
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public int getAge() { return age; }
 
-    public int getAge() {
-        return age;
-    }
-
-    public boolean hasLearnersPermit() {
-        return hasLearnersPermit;
+    @Override
+    public String toString() {
+        return id + " - " + name + " (" + age + ")";
     }
 }
