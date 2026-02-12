@@ -1,16 +1,13 @@
+package com.example.govtech.model;
+
 public class ServiceRequest {
+    private String requestDetails;
 
-    private ServiceType serviceType;
-
-    public ServiceRequest(ServiceType serviceType) {
-        this.serviceType = serviceType;
+    public ServiceRequest(String requestDetails) {
+        this.requestDetails = requestDetails;
     }
 
-    public ServiceType getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(ServiceType serviceType) {
-        this.serviceType = serviceType;
+    public String getRequestDetails() {
+        return requestDetails;
     }
 }
